@@ -1,45 +1,143 @@
-# **Official Repository of the Paper**: **_HuLLMI: Human vs. LLM Identification with Explainability_**
+# **Official Repository of the Paper**: **_DeBERTa-Sentinel: Enhanced AI-Generated Text Detection Using Disentangled Attention_**
 
-Welcome to the official repository for the paper _"HULLMI: Human vs. LLM Identification with Explainability."_ This repository contains the datasets used in our study, including our self-curated dataset, as well as the code used for various machine learning models.
+Welcome to the official repository for the paper _"DeBERTa-Sentinel: Enhanced AI-Generated Text Detection Using Disentangled Attention."_ This repository contains the datasets, models, and code used in our comprehensive study on AI-generated text detection.
 
-Repository Contents
+## Repository Contents
 
-**Datasets**: The datasets used for our study, including the curated dataset, are available in this repository.
+### **Datasets**
+- **MultiLLMText-Final Dataset**: Our enhanced dataset comprising 30,626 paraphrased samples generated using multiple LLMs (GPT-3.5, LLaMA, Claude)
+- **OpenWebText-Final**: Human-written samples from the cleaned OpenWebText corpus
+- Complete dataset breakdown across 8 subsets (urlsf_00 to urlsf_06, urlsf_09)
 
-**Traditional Machine Learning Models**:
+### **Models**
 
-The code for traditional machine learning models (excluding LSTM) can be found in the HuLLMI_Paper_ML_Traditional_Model.ipynb notebook, which you can access by downloading the provided ZIP file.
+**DeBERTa-Sentinel (Main Contribution)**:
+- Enhanced detection framework leveraging DeBERTa-v3's disentangled attention mechanism
+- End-to-end fine-tuned architecture with 256-token input sequences
+- Achieves 92.1% detection accuracy with superior generalization capabilities
 
-**Advance Deep Learning Models**:
+**Baseline Models**:
+- **RoBERTa-Sentinel**: Comparative baseline using RoBERTa encoder
+- **Traditional ML Models**: TF-IDF + Logistic Regression, Random Forest, and other classical approaches
 
-For LSTM, T5-Sentinel, and RoBERTa-Sentinel models, refer to the LSTM_T5_Sentinel_and_Roberta_Sentinel_T5_Sentinel_ROC_DET.ipynb notebook.
-For detailed code snippets of the RoBERTa-Sentinel model, check the HuLLMI_Roberta_Sentinel_.ipynb notebook.
+### **Repository Structure**
 
-**Plot Generation**:
+**Main Model Implementation**:
+- `HuLLMI_Deberta_Sentinel_.ipynb`: Complete DeBERTa-Sentinel implementation and training pipeline
+- `HuLLMI_Paper_ML_Traditional_Model.zip`: Traditional machine learning models (Naive Bayes, MLP, Random Forest, XGBoost)
 
-We've included additional code snippets used for plot generation. Please review the relevant sections for more details.
+**Dataset Files**:
+- `OpenGPTText_cSV_format/`: Dataset in CSV format containing the training data
+- `Custom_Test_Final.csv`: Custom test dataset for evaluation
+- `Detailed Sample Mentioned in the Paper HuLL...`: Detailed sample data referenced in the paper
 
-Detailed Sample Can Be Found in the Repo as mentioned in Paper 
+**Explainability Analysis**:
+- `lime_explanation_sample_1.html`: LIME explainability visualization (Sample 1)
+- `lime_explanation_sample_2.html`: LIME explainability visualization (Sample 2) 
+- `lime_explanation_sample_3.html`: LIME explainability visualization (Sample 3)
+- `lime_explanation_sample_4.html`: LIME explainability visualization (Sample 4)
+- `lime_explanation_sample_5.html`: LIME explainability visualization (Sample 5)
 
-Note: To view the LIME plots from our study, please open the notebooks in Google Colab or Jupyter Notebook.
+**Documentation**:
+- `README.md`: This comprehensive documentation file
+- `.git/`: Git version control directory
 
----------------------------**ABSTRACT**--------------------------------
+### **Key Features**
 
-As LLMs become increasingly proficient at producing human-like responses, there has been a rise of
-academic and industrial pursuits dedicated to flagging a given piece of text as "human" or "AI". Most
-of these pursuits involve modern NLP detectors like T5-Sentinel and RoBERTa-Sentinel, without
-paying too much attention to issues of interpretability and explainability of these models. In our study,
-we provide a comprehensive analysis which shows that traditional ML models (Naive-Bayes, MLP,
-Random Forests, XGBoost) perform as well as modern NLP detectors, in human vs AI text detection.
-We achieve this by implementing a robust testing procedure on diverse datasets, including both
-curated corpora and real-world samples. Subsequently, by employing explainable AI techniques like
-LIME, we uncover parts of the input which contribute most to a model’s prediction, providing insights
-into the detection process. Our study contributes to the growing need for developing production level
-LLM detection tools, which can leverage a wide range of traditional as well as modern NLP detectors
-we propose. Finally, the LIME techniques we demonstrate also have the potential to equip these
-detection tools with interpretability analysis features, making them more reliable and trustworthy in
-various domains like education, healthcare and media.
------------------------------------------------------------------------------------------------------
+**Disentangled Attention Architecture**:
+- Content-to-Content attention for semantic relationship analysis
+- Content-to-Position attention for structural pattern detection  
+- Position-to-Content attention for templating behavior identification
 
+**Performance Improvements**:
+- 2.7% improvement in detection accuracy over RoBERTa-Sentinel
+- 4.2% gain in precision (88.9% vs 84.7%)
+- 2.8% increase in recall (94.3% vs 91.5%)
+- 99.79% ROC-AUC score with superior discrimination capability
 
-This work is Collectively Done by Prathamesh Dinesh Joshi, Sahil Pocker, Raj Abhijit Dandekar, Rajat Dandekar and Sreedath Panat
+**Explainability Analysis**:
+- Token-level contribution visualization
+- Identification of formal transitional phrases and academic terminology as AI indicators
+- Attention-based interpretability for understanding model decisions
+
+## Results Summary
+
+| Model | Accuracy | F1-Score | Precision | Recall | AUC |
+|-------|----------|----------|-----------|---------|-----|
+| **DeBERTa-Sentinel** | **92.1%** | **0.977** | **88.9%** | **94.3%** | **99.79%** |
+| RoBERTa-Sentinel | 89.4% | 0.951 | 84.7% | 91.5% | 99.71% |
+| TF-IDF + LogReg | 86.42% | 0.867 | 85.19% | 88.24% | - |
+
+### Commercial Detector Comparison
+- **10-16% accuracy improvements** over ZeroGPT, GPTZero, and OpenAI Text Classifier
+- Superior token-level interpretability compared to black-box commercial solutions
+- Enhanced customization capabilities for domain-specific applications
+
+## Usage Instructions
+
+### Running DeBERTa-Sentinel
+1. **Main Implementation**: Open `HuLLMI_Deberta_Sentinel_.ipynb` in Google Colab or Jupyter Notebook
+2. **Traditional ML Models**: Extract and run `HuLLMI_Paper_ML_Traditional_Model.zip` 
+3. **Dataset Loading**: Use the CSV files in `OpenGPTText_cSV_format/` for training data
+4. **Custom Testing**: Evaluate using `Custom_Test_Final.csv` for performance assessment
+
+### Viewing Explainability Results
+Open any of the LIME explanation HTML files (`lime_explanation_sample_1.html` to `lime_explanation_sample_5.html`) in a web browser to view:
+- Token-level contribution analysis
+- Feature importance visualization  
+- Model decision interpretability
+
+## Dataset Access
+
+The MultiLLMText-Final dataset contains:
+- **GPT-3.5 Generated**: 9,374 samples
+- **LLaMA Generated**: 10,400 samples  
+- **Claude Generated**: 8,283 samples
+- **Human-written**: Corresponding OpenWebText samples
+
+## Key Contributions
+
+1. **Novel Architecture**: Introduction of disentangled attention for AI text detection
+2. **Enhanced Dataset**: Multi-LLM training corpus for improved generalization
+3. **Superior Performance**: Consistent improvements across all evaluation metrics
+4. **Interpretability**: Token-level explainability revealing discriminative patterns
+5. **Comprehensive Evaluation**: Extensive comparison with commercial and academic baselines
+
+## Citation
+
+If you use this work in your research, please cite:
+
+```bibtex
+@article{rehman2025deberta,
+  title={DeBERTa-Sentinel: Enhanced AI-Generated Text Detection Using Disentangled Attention},
+  author={Rehman, Muhammad Yousaf and Islam, Muhammad and Hussain, Basharat},
+  journal={IEEE Conference Proceedings},
+  year={2025}
+}
+```
+
+## Authors
+
+**Muhammad Yousaf Rehman***  
+SPECS, University of Hertfordshire, UK  
+my.rehman007@gmail.com
+
+**Muhammad Islam***  
+College of Science and Engineering, James Cook University, Australia  
+muhammad.islam1@jcu.edu.au
+
+**Basharat Hussain**  
+Department of Computer Science, NUCES, Pakistan  
+basharat.hussian@nuces.edu.pk
+
+*Equal contribution
+
+## Abstract
+
+The proliferation of large language models (LLMs) has created an urgent need for robust AI-generated text detection systems across domains including journalism, education, and legal applications. While transformer-based detectors like GPT-Sentinel have shown promise using RoBERTa encoders, they exhibit limited generalization across diverse model outputs and adversarial modifications. This study introduces DeBERTa-Sentinel, an enhanced detection framework that leverages DeBERTa-v3's disentangled attention mechanism to improve upon existing approaches. Our proposed approach separates content and positional information during self-attention computation, enabling superior capture of subtle structural irregularities characteristic of synthetic text. Comprehensive evaluation demonstrates that DeBERTa-Sentinel consistently outperforms RoBERTa-Sentinel across key metrics with superior generalization on distribution-shifted data. Explainability analysis reveals that DeBERTa-Sentinel effectively identifies formal transitional phrases and academic terminology as AI-indicative features, providing interpretable token-level predictions for forensic applications requiring high precision and interpretability.
+
+---
+
+**Repository Link**: https://github.com/Galileo-Galili/HUMAN-VS-AI-TEXT-DETECTION
+
+**Note**: For optimal visualization of attention mechanisms and explainability plots, please open the notebooks in Google Colab or Jupyter Notebook.
