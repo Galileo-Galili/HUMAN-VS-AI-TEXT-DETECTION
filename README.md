@@ -132,7 +132,7 @@ muhammad.islam1@jcu.edu.au
 Department of Computer Science, NUCES, Pakistan  
 basharat.hussian@nuces.edu.pk
 
-*Equal contribution
+
 
 ## Abstract
 
