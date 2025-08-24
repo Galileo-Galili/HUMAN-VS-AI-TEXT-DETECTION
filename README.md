@@ -130,8 +130,6 @@ muhammad.islam1@jcu.edu.au
 Department of Computer Science, NUCES, Pakistan  
 basharat.hussian@nuces.edu.pk
 
-*Equal contribution
-
 ## Abstract
 
 The proliferation of large language models (LLMs) has created an urgent need for robust AI-generated text detection systems across domains including journalism, education, and legal applications. While transformer-based detectors like GPT-Sentinel have shown promise using RoBERTa encoders, they exhibit limited generalization across diverse model outputs and adversarial modifications. This study introduces DeBERTa-Sentinel, an enhanced detection framework that leverages DeBERTa-v3's disentangled attention mechanism to improve upon existing approaches. Our proposed approach separates content and positional information during self-attention computation, enabling superior capture of subtle structural irregularities characteristic of synthetic text. Comprehensive evaluation demonstrates that DeBERTa-Sentinel consistently outperforms RoBERTa-Sentinel across key metrics with superior generalization on distribution-shifted data. Explainability analysis reveals that DeBERTa-Sentinel effectively identifies formal transitional phrases and academic terminology as AI-indicative features, providing interpretable token-level predictions for forensic applications requiring high precision and interpretability.
