@@ -14,7 +14,7 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: Enhanced AI
 **DeBERTa-Sentinel (Main Contribution)**:
 - Enhanced detection framework leveraging DeBERTa-v3's disentangled attention mechanism
 - End-to-end fine-tuned architecture with 256-token input sequences
-- Achieves 92.1% detection accuracy with superior generalization capabilities
+- Achieves 97.65% detection accuracy with superior generalization capabilities
 
 **Baseline Models**:
 - **RoBERTa-Sentinel**: Comparative baseline using RoBERTa encoder
@@ -50,10 +50,12 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: Enhanced AI
 - Position-to-Content attention for templating behavior identification
 
 **Performance Improvements**:
-- 2.7% improvement in detection accuracy over RoBERTa-Sentinel
-- 4.2% gain in precision (88.9% vs 84.7%)
-- 2.8% increase in recall (94.3% vs 91.5%)
+- **Accuracy: 97.65%** (0.9765)
+- **F1-Score: 97.69%** (0.9769)
+- **Precision: 96.15%** (0.9615)
+- **Recall: 99.28%** (0.9928)
 - 99.79% ROC-AUC score with superior discrimination capability
+- Significant improvements over traditional ML baselines
 
 **Explainability Analysis**:
 - Token-level contribution visualization
@@ -64,9 +66,9 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: Enhanced AI
 
 | Model | Accuracy | F1-Score | Precision | Recall | AUC |
 |-------|----------|----------|-----------|---------|-----|
-| **DeBERTa-Sentinel** | **92.1%** | **0.977** | **88.9%** | **94.3%** | **99.79%** |
-| RoBERTa-Sentinel | 89.4% | 0.951 | 84.7% | 91.5% | 99.71% |
-| TF-IDF + LogReg | 86.42% | 0.867 | 85.19% | 88.24% | - |
+| **DeBERTa-Sentinel** | **97.65%** | **97.69%** | **96.15%** | **99.28%** | **99.79%** |
+| TF-IDF + LogReg | 86.42% | 86.70% | 85.19% | 88.24% | - |
+| Random Baseline | 49.06% | 49.10% | 49.15% | 49.05% | - |
 
 ### Commercial Detector Comparison
 - **10-16% accuracy improvements** over ZeroGPT, GPTZero, and OpenAI Text Classifier
@@ -130,6 +132,8 @@ muhammad.islam1@jcu.edu.au
 Department of Computer Science, NUCES, Pakistan  
 basharat.hussian@nuces.edu.pk
 
+*Equal contribution
+
 ## Abstract
 
 The proliferation of large language models (LLMs) has created an urgent need for robust AI-generated text detection systems across domains including journalism, education, and legal applications. While transformer-based detectors like GPT-Sentinel have shown promise using RoBERTa encoders, they exhibit limited generalization across diverse model outputs and adversarial modifications. This study introduces DeBERTa-Sentinel, an enhanced detection framework that leverages DeBERTa-v3's disentangled attention mechanism to improve upon existing approaches. Our proposed approach separates content and positional information during self-attention computation, enabling superior capture of subtle structural irregularities characteristic of synthetic text. Comprehensive evaluation demonstrates that DeBERTa-Sentinel consistently outperforms RoBERTa-Sentinel across key metrics with superior generalization on distribution-shifted data. Explainability analysis reveals that DeBERTa-Sentinel effectively identifies formal transitional phrases and academic terminology as AI-indicative features, providing interpretable token-level predictions for forensic applications requiring high precision and interpretability.
@@ -138,4 +142,4 @@ The proliferation of large language models (LLMs) has created an urgent need for
 
 **Repository Link**: https://github.com/Galileo-Galili/HUMAN-VS-AI-TEXT-DETECTION
 
-**Note**: For optimal visualization of attention mechanisms and explainability plots, please open the notebooks in Google Colab or Jupyter Notebook.
+**Note**: This repository contains the research implementation for the paper "DeBERTa-Sentinel: Enhanced AI-Generated Text Detection Using Disentangled Attention." The paper is currently under review. For optimal visualization of LIME explainability analysis and attention mechanisms, please open the notebook files in Google Colab or Jupyter Notebook, and view the HTML explainability files in a web browser.
