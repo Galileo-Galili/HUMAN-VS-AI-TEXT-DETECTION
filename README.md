@@ -23,13 +23,11 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: Enhanced AI
 ### **Repository Structure**
 
 **Main Model Implementation**:
-- `HuLLMI_Deberta_Sentinel_.ipynb`: Complete DeBERTa-Sentinel implementation and training pipeline
-- `HuLLMI_Paper_ML_Traditional_Model.zip`: Traditional machine learning models (Naive Bayes, MLP, Random Forest, XGBoost)
+- `HvsAI_Deberta_Sentinel_.ipynb`: Complete DeBERTa-Sentinel implementation and training pipeline
 
 **Dataset Files**:
 - `OpenGPTText_cSV_format/`: Dataset in CSV format containing the training data
 - `Custom_Test_Final.csv`: Custom test dataset for evaluation
-- `Detailed Sample Mentioned in the Paper HuLL...`: Detailed sample data referenced in the paper
 
 **Explainability Analysis**:
 - `lime_explanation_sample_1.html`: LIME explainability visualization (Sample 1)
