@@ -78,6 +78,18 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
 | TF-IDF + LogReg | 86.42% | 0.867 | 85.19% | 88.24% | - |
 | Random Baseline | 49.06% | 0.491 | 49.15% | 49.05% | - |
 
+### ROC Curve Analysis
+
+![ROC Curve](ROC_AUC.PNG)
+
+*Figure 1: ROC curve for DeBERTa-Sentinel showing exceptional discrimination capability with 99.79% AUC. The near-perfect curve hugging the top-left corner demonstrates superior ability to distinguish between AI and human text compared to random classification.*
+
+### F1-Score Comparison
+
+![F1 Score Comparison](F1_chart.PNG)
+
+*Figure 2: F1-score comparison across baseline models showing DeBERTa-Sentinel's performance (0.977) relative to traditional ML approaches, demonstrating a 12.7% improvement over TF-IDF + LogReg.*
+
 ### Performance Gains Over RoBERTa-Sentinel
 
 | Metric | RoBERTa-Sentinel | DeBERTa-Sentinel | Improvement |
@@ -113,6 +125,18 @@ Performance comparison with commercial detectors from prior literature:
 ## Model Architecture and Training
 
 ### DeBERTa-Sentinel Architecture
+
+![DeBERTa-Sentinel Architecture](RoBERTa%20VS%20DeBERTa.drawio%20(1).png)
+
+*Figure 3: The DeBERTa-Sentinel architecture. The input sequence is embedded and processed through 12 layers of disentangled attention. The final [CLS] token representation is used for classification via the internal feedforward layer. The architecture is fully end-to-end fine-tuned with gradients backpropagating through all layers of the encoder.*
+
+### Disentangled Attention Mechanism
+
+![Disentangled Attention](DDA.drawio.png)
+
+*Figure 4: DeBERTa's disentangled self-attention architecture for AI text detection, which separates traditional attention into three components: Content-to-Content (semantic relationships), Content-to-Position (how content relates to structure), and Position-to-Content (how position influences meaning). By analyzing content and structural patterns separately rather than together, this approach can detect subtle AI writing signatures like unnatural vocabulary usage, templating patterns, and content-position misalignments that distinguish AI-generated text from human writing.*
+
+**Architecture Details**:
 - **Base Model**: DeBERTa-v3-small (Microsoft/deberta-v3-small)
 - **Architecture**: DebertaV2ForSequenceClassification
 - **Encoder Layers**: 12 layers of disentangled attention
@@ -197,6 +221,18 @@ Open any of the LIME explanation HTML files (`lime_explanation_sample_1.html` to
 5. **Comprehensive Evaluation**: Extensive comparison with commercial and academic baselines demonstrating substantial improvements (F1: 0.977 vs 0.32-0.43 for commercial detectors)
 
 ## Explainability Insights
+
+### Token-Level Feature Importance
+
+![Feature Importance](expl%20bars.PNG)
+
+*Figure 5: Top 20 most important features averaged across samples showing DeBERTa-Sentinel's learned patterns. High-importance words like "background" (0.254), "system" (0.216), and "Lemay" (0.144) indicate formal language structures that the model associates with AI-generated content.*
+
+### Example Text Analysis
+
+![Text Highlighting Example](expl%20para.PNG)
+
+*Figure 6: Example of token-level explainability visualization showing how DeBERTa-Sentinel highlights specific words in a movie review. Orange highlighting indicates words that contribute toward AI classification, demonstrating the model's attention to formal transitional phrases like "Although" and structured language patterns.*
 
 The model's decision-making process reveals:
 
