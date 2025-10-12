@@ -230,7 +230,7 @@ Open any of the LIME explanation HTML files (`lime_explanation_sample_1.html` to
 
 ### Example Text Analysis
 
-![Text Highlighting Example](expl para.PNG)
+![Text Highlighting Example](expl_para.PNG)
 
 *Figure 6: Example of token-level explainability visualization showing how DeBERTa-Sentinel highlights specific words in a movie review. Orange highlighting indicates words that contribute toward AI classification, demonstrating the model's attention to formal transitional phrases like "Although" and structured language patterns.*
 
