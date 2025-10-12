@@ -80,13 +80,13 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
 
 ### ROC Curve Analysis
 
-![ROC Curve](ROC_AUC.PNG)
+![ROC Curve](roc_curve_highres.png)
 
 *Figure 1: ROC curve for DeBERTa-Sentinel showing exceptional discrimination capability with 99.79% AUC. The near-perfect curve hugging the top-left corner demonstrates superior ability to distinguish between AI and human text compared to random classification.*
 
 ### F1-Score Comparison
 
-![F1 Score Comparison](F1_chart.PNG)
+![F1 Score Comparison](f1_comparison_highres.png)
 
 *Figure 2: F1-score comparison across baseline models showing DeBERTa-Sentinel's performance (0.977) relative to traditional ML approaches, demonstrating a 12.7% improvement over TF-IDF + LogReg.*
 
@@ -224,13 +224,13 @@ Open any of the LIME explanation HTML files (`lime_explanation_sample_1.html` to
 
 ### Token-Level Feature Importance
 
-![Feature Importance](expl%20bars.PNG)
+![Feature Importance](lime_average_feature_importance.png)
 
 *Figure 5: Top 20 most important features averaged across samples showing DeBERTa-Sentinel's learned patterns. High-importance words like "background" (0.254), "system" (0.216), and "Lemay" (0.144) indicate formal language structures that the model associates with AI-generated content.*
 
 ### Example Text Analysis
 
-![Text Highlighting Example](expl%20para.PNG)
+![Text Highlighting Example](expl para.PNG)
 
 *Figure 6: Example of token-level explainability visualization showing how DeBERTa-Sentinel highlights specific words in a movie review. Orange highlighting indicates words that contribute toward AI classification, demonstrating the model's attention to formal transitional phrases like "Although" and structured language patterns.*
 
