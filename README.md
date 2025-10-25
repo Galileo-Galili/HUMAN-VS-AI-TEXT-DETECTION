@@ -84,7 +84,7 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
 ### ROC Curve Analysis
 
 <div align="center">
-  <img src="roc_curve_highres.png" alt="ROC Curve" width="500" height="500">
+  <img src="roc_curve_highres.png" alt="ROC Curve" width="500" height="300">
 </div>
 
 *Figure 1: ROC curve for DeBERTa-Sentinel showing exceptional discrimination capability with 99.53% AUC. The near-perfect curve hugging the top-left corner demonstrates superior ability to distinguish between AI and human text compared to random classification.*
