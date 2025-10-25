@@ -10,7 +10,7 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
   <img src="RvDdrawio.png" alt="DeBERTa-Sentinel Architecture" width="700">
 </div>
 
-*Figure 3: Complete DeBERTa-Sentinel architecture showing the disentangled attention mechanism. The framework processes input text through tokenization, applies separate content and positional embeddings, processes through 6 transformer layers with disentangled self-attention, and outputs binary classification (Human vs AI) with token-level explainability.*
+*Figure 1: Complete DeBERTa-Sentinel architecture showing the disentangled attention mechanism. The framework processes input text through tokenization, applies separate content and positional embeddings, processes through 6 transformer layers with disentangled self-attention, and outputs binary classification (Human vs AI) with token-level explainability.*
 
 ### Architecture Components
 
@@ -139,7 +139,7 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
   <img src="roc_curve_highres.png" alt="ROC Curve" width="500" height="400">
 </div>
 
-*Figure 1: ROC curve for DeBERTa-Sentinel showing exceptional discrimination capability with 99.53% AUC. The near-perfect curve hugging the top-left corner demonstrates superior ability to distinguish between AI and human text compared to random classification.*
+*Figure 2: ROC curve for DeBERTa-Sentinel showing exceptional discrimination capability with 99.53% AUC. The near-perfect curve hugging the top-left corner demonstrates superior ability to distinguish between AI and human text compared to random classification.*
 
 ### F1-Score Comparison
 
@@ -147,7 +147,7 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
   <img src="f1_comparison_highres.png" alt="F1 Score Comparison" width="500" height="500">
 </div>
 
-*Figure 2: F1-score comparison across baseline models showing DeBERTa-Sentinel's performance (0.976) relative to traditional ML approaches, demonstrating a 12.6% improvement over TF-IDF + LogReg.*
+*Figure 3: F1-score comparison across baseline models showing DeBERTa-Sentinel's performance (0.976) relative to traditional ML approaches, demonstrating a 12.6% improvement over TF-IDF + LogReg.*
 
 ### Performance Gains Over RoBERTa-Sentinel
 
