@@ -2,6 +2,58 @@
 
 Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explainable AI-Generated Text Detection Framework Using Disentangled Attention."_ This repository contains the datasets, models, and code used in our comprehensive study on AI-generated text detection.
 
+## Model Architecture and Training
+
+### DeBERTa-Sentinel Architecture
+
+<div align="center">
+  <img src="RvDdrawio.png" alt="DeBERTa-Sentinel Architecture" width="700">
+</div>
+
+*Figure 3: Complete DeBERTa-Sentinel architecture showing the disentangled attention mechanism. The framework processes input text through tokenization, applies separate content and positional embeddings, processes through 6 transformer layers with disentangled self-attention, and outputs binary classification (Human vs AI) with token-level explainability.*
+
+### Architecture Components
+
+**Input Processing**:
+- Maximum sequence length: 256 tokens
+- Tokenization using DeBERTa-v3-small tokenizer
+- Separate content and position embedding matrices
+
+**Disentangled Attention Mechanism**:
+- Content-to-Content attention: Captures semantic relationships
+- Content-to-Position attention: Models structural patterns
+- Position-to-Content attention: Identifies templating behaviors
+
+**Transformer Encoder**:
+- 6 transformer layers with disentangled self-attention
+- 12 attention heads per layer
+- Hidden dimension: 768
+
+**Classification Head**:
+- Pooled representation from [CLS] token
+- Dense layer with dropout
+- Binary output (Human vs AI-generated)
+
+### Training Configuration
+
+**Optimization**:
+- Optimizer: AdamW
+- Learning rate: 2e-5
+- Batch size: 16
+- Weight decay: 0.01
+- Warmup steps: 500
+
+**Training Setup**:
+- Total epochs: 5
+- Best model selection: Validation-based (Epoch 2)
+- Train/Val/Test split: 60/20/20
+- Dataset size: 58,537 samples
+
+**Regularization**:
+- Dropout rate: 0.1
+- Gradient clipping: 1.0
+- Early stopping based on validation accuracy
+
 ## Repository Contents
 
 ### **Datasets**
@@ -130,45 +182,17 @@ Performance comparison with commercial detectors from prior literature:
 - Methodological transparency supporting reproducible research
 - Adaptability to emerging LLMs
 
-## Model Architecture and Training
-
-### DeBERTa-Sentinel Architecture
+### Training Progression
 
 <div align="center">
-  <img src="RvDdrawio.png" alt="DeBERTa-Sentinel Architecture" width="700">
+  <img src="training_validation_graph.png" alt="Training and Validation Performance" width="600">
 </div>
 
-*Figure 3: The DeBERTa-Sentinel architecture. The input sequence is embedded and processed through 12 layers of disentangled attention. The final [CLS] token representation is used for classification via the internal feedforward layer. The architecture is fully end-to-end fine-tuned with gradients backpropagating through all layers of the encoder.*
+*Figure 4: Training and validation accuracy progression across 5 epochs. The model achieves peak validation performance at epoch 2 (98.21%), which is selected as the final model to prevent overfitting. The gap between epoch 5 training accuracy (99.58%) and epoch 2 validation accuracy demonstrates effective regularization.*
 
-### Disentangled Attention Mechanism
+## Dataset Composition
 
-The DeBERTa architecture enhances transformer models by disentangling content and position information in the self-attention mechanism:
-
-**Traditional Attention**:
-```
-Attention(Q, K, V) = softmax(QK^T / √d_k)V
-```
-
-**Disentangled Attention Components**:
-1. **Content-to-Content (C2C)**: Captures semantic relationships between tokens
-2. **Content-to-Position (C2P)**: Models how content relates to positional structure
-3. **Position-to-Content (P2C)**: Captures positional biases in content understanding
-
-This decomposition enables more nuanced understanding of linguistic patterns characteristic of AI-generated text.
-
-### Training Details
-- **Architecture**: DeBERTa-v3-small (44M parameters)
-- **Sequence Length**: 256 tokens
-- **Optimizer**: AdamW (lr=2e-5, β1=0.9, β2=0.999, ε=1e-8)
-- **Batch Size**: 64
-- **Epochs**: 5 (best model from epoch 2)
-- **Weight Decay**: 0.01
-- **Gradient Clipping**: 1.0
-- **Learning Rate Schedule**: Linear warmup + decay
-
-## Dataset Details
-
-### GLC-AIText Dataset Composition
+### GLC-AIText Breakdown
 
 **GLC-AIText** = **G**PT-3.5 + **L**LaMA + **C**laude AI-generated Text
 
@@ -198,6 +222,31 @@ Human-written samples obtained from the OpenWebText corpus, a publicly available
 
 ### Data Collection Method
 AI-generated samples created by paraphrasing cleaned human-written samples using the prompt: "Rephrase the following paragraph by paragraph." Samples longer than 2,000 words were filtered due to model input limitations. Content blocked by safety filters was excluded, and outputs were filtered for fluency and coherence.
+
+## Explainability Insights
+
+### Token-Level Feature Importance
+
+<div align="center">
+  <img src="lime_average_feature_importance.png" alt="Feature Importance" width="500">
+</div>
+
+*Figure 5: Top 20 most important features averaged across samples showing DeBERTa-Sentinel's learned patterns. High-importance words like "system" (0.245), "background" (0.200), and "situation" (0.145) indicate formal language structures and contextual markers that the model associates with AI-generated content.*
+
+### Example Text Analysis
+
+<div align="center">
+  <img src="expl_para.PNG" alt="Text Highlighting Example" width="500" height="500">
+</div>
+
+*Figure 6: Example of token-level explainability visualization showing how DeBERTa-Sentinel highlights specific words in a movie review. Orange highlighting indicates words that contribute toward AI classification, demonstrating the model's attention to formal transitional phrases like "Although" and structured language patterns.*
+
+The model's decision-making process reveals:
+
+- **Formal Language Detection**: Prioritization of formal vocabulary and structured language patterns (e.g., "system", "background")
+- **Contextual Understanding**: Analysis of context rather than isolated words, identifying transitional phrases like "Although" in formal discourse
+- **Stylistic Pattern Recognition**: Identification of characteristic LLM patterns such as formal conclusions ("demonstrates", "conclusion") and academic terminology
+- **Balanced Analysis**: Use of both positive and negative feature contributions for robust classification
 
 ## Usage Instructions
 
@@ -230,31 +279,6 @@ Open any of the LIME explanation HTML files (`lime_explanation_sample_1.html` to
 
 6. **Comprehensive Evaluation**: Extensive comparison with commercial and academic baselines demonstrating substantial improvements (F1: 0.977 vs 0.32-0.43 for commercial detectors)
 
-## Explainability Insights
-
-### Token-Level Feature Importance
-
-<div align="center">
-  <img src="lime_average_feature_importance.png" alt="Feature Importance" width="500">
-</div>
-
-*Figure 5: Top 20 most important features averaged across samples showing DeBERTa-Sentinel's learned patterns. High-importance words like "system" (0.245), "background" (0.200), and "situation" (0.145) indicate formal language structures and contextual markers that the model associates with AI-generated content.*
-
-### Example Text Analysis
-
-<div align="center">
-  <img src="expl_para.PNG" alt="Text Highlighting Example" width="500" height="500">
-</div>
-
-*Figure 6: Example of token-level explainability visualization showing how DeBERTa-Sentinel highlights specific words in a movie review. Orange highlighting indicates words that contribute toward AI classification, demonstrating the model's attention to formal transitional phrases like "Although" and structured language patterns.*
-
-The model's decision-making process reveals:
-
-- **Formal Language Detection**: Prioritization of formal vocabulary and structured language patterns (e.g., "system", "background")
-- **Contextual Understanding**: Analysis of context rather than isolated words, identifying transitional phrases like "Although" in formal discourse
-- **Stylistic Pattern Recognition**: Identification of characteristic LLM patterns such as formal conclusions ("demonstrates", "conclusion") and academic terminology
-- **Balanced Analysis**: Use of both positive and negative feature contributions for robust classification
-
 ## Methodological Notes
 
 ### Model Selection and Hyperparameter Tuning
@@ -271,6 +295,10 @@ The model showed clear learning patterns:
 - **Epoch 5**: 99.58% training accuracy (overfitting detected)
 
 The gap between epoch 5 training accuracy (99.58%) and epoch 2 validation accuracy (98.21%) demonstrates effective overfitting prevention through validation-based model selection.
+
+## Abstract
+
+The proliferation of large language models (LLMs) has created an urgent need for robust AI-generated text detection systems across domains including journalism, education, and legal applications. While transformer-based detectors like GPT-Sentinel have shown promise using RoBERTa encoders, they exhibit limited generalization across diverse model outputs and adversarial modifications. This study introduces DeBERTa-Sentinel, an enhanced detection framework architecture that leverages DeBERTa-v3's disentangled attention mechanism to improve upon existing approaches. Our proposed approach separates content and positional information during self-attention computation, enabling superior capture of subtle structural irregularities characteristic of synthetic text. We enhance training robustness by incorporating outputs from multiple LLMs (GPT-3.5, LLaMA, Claude) in our GLC-AIText dataset, comprising 28,057 paraphrased samples. Trained using a rigorous 60/20/20 train/validation/test split, the model achieved optimal performance at epoch 2 with 98.21% validation accuracy. Comprehensive evaluation demonstrates that DeBERTa-Sentinel achieves superior performance compared to RoBERTa-Sentinel: 97.53% test accuracy vs 95.3%, representing a 2.23 percentage point improvement. DeBERTa-Sentinel achieves 95.89% precision and 99.33% recall, compared to RoBERTa-Sentinel's 94.5% precision and 96.3% recall. The model exhibits exceptional discrimination capability with 99.53% ROC-AUC and 0.67% false negative rate. Explainability analysis reveals that DeBERTa-Sentinel effectively identifies formal transitional phrases and academic terminology as AI-indicative features. The model demonstrates 12.6% F1-score improvement over traditional machine learning baselines while providing token-level interpretability. These results validate disentangled attention as a promising architectural innovation for AI-generated content detection, with implications for forensic applications requiring high precision and interpretability.
 
 ## Citation
 
@@ -297,12 +325,6 @@ muhammad.islam1@jcu.edu.au
 **Basharat Hussain**  
 Department of Computer Science, NUCES, Pakistan  
 basharat.hussian@nuces.edu.pk
-
-
-
-## Abstract
-
-The proliferation of large language models (LLMs) has created an urgent need for robust AI-generated text detection systems across domains including journalism, education, and legal applications. While transformer-based detectors like GPT-Sentinel have shown promise using RoBERTa encoders, they exhibit limited generalization across diverse model outputs and adversarial modifications. This study introduces DeBERTa-Sentinel, an enhanced detection framework architecture that leverages DeBERTa-v3's disentangled attention mechanism to improve upon existing approaches. Our proposed approach separates content and positional information during self-attention computation, enabling superior capture of subtle structural irregularities characteristic of synthetic text. We enhance training robustness by incorporating outputs from multiple LLMs (GPT-3.5, LLaMA, Claude) in our GLC-AIText dataset, comprising 28,057 paraphrased samples. Trained using a rigorous 60/20/20 train/validation/test split, the model achieved optimal performance at epoch 2 with 98.21% validation accuracy. Comprehensive evaluation demonstrates that DeBERTa-Sentinel achieves superior performance compared to RoBERTa-Sentinel: 97.53% test accuracy vs 95.3%, representing a 2.23 percentage point improvement. DeBERTa-Sentinel achieves 95.89% precision and 99.33% recall, compared to RoBERTa-Sentinel's 94.5% precision and 96.3% recall. The model exhibits exceptional discrimination capability with 99.53% ROC-AUC and 0.67% false negative rate. Explainability analysis reveals that DeBERTa-Sentinel effectively identifies formal transitional phrases and academic terminology as AI-indicative features. The model demonstrates 12.6% F1-score improvement over traditional machine learning baselines while providing token-level interpretability. These results validate disentangled attention as a promising architectural innovation for AI-generated content detection, with implications for forensic applications requiring high precision and interpretability.
 
 ---
 
