@@ -84,7 +84,7 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
 ### ROC Curve Analysis
 
 <div align="center">
-  <img src="roc_curve_highres.png" alt="ROC Curve" width="600">
+  <img src="roc_curve_highres.png" alt="ROC Curve" width="500" height="500">
 </div>
 
 *Figure 1: ROC curve for DeBERTa-Sentinel showing exceptional discrimination capability with 99.53% AUC. The near-perfect curve hugging the top-left corner demonstrates superior ability to distinguish between AI and human text compared to random classification.*
@@ -92,7 +92,7 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
 ### F1-Score Comparison
 
 <div align="center">
-  <img src="f1_comparison_highres.png" alt="F1 Score Comparison" width="600">
+  <img src="f1_comparison_highres.png" alt="F1 Score Comparison" width="500" height="500">
 </div>
 
 *Figure 2: F1-score comparison across baseline models showing DeBERTa-Sentinel's performance (0.976) relative to traditional ML approaches, demonstrating a 12.6% improvement over TF-IDF + LogReg.*
@@ -135,7 +135,7 @@ Performance comparison with commercial detectors from prior literature:
 ### DeBERTa-Sentinel Architecture
 
 <div align="center">
-  <img src="RoBERTa%20VS%20DeBERTa.drawio%20(1).png" alt="DeBERTa-Sentinel Architecture" width="700">
+  <img src="RvDdrawio.png" alt="DeBERTa-Sentinel Architecture" width="700">
 </div>
 
 *Figure 3: The DeBERTa-Sentinel architecture. The input sequence is embedded and processed through 12 layers of disentangled attention. The final [CLS] token representation is used for classification via the internal feedforward layer. The architecture is fully end-to-end fine-tuned with gradients backpropagating through all layers of the encoder.*
@@ -235,7 +235,7 @@ Open any of the LIME explanation HTML files (`lime_explanation_sample_1.html` to
 ### Token-Level Feature Importance
 
 <div align="center">
-  <img src="lime_average_feature_importance.png" alt="Feature Importance" width="600">
+  <img src="lime_average_feature_importance.png" alt="Feature Importance" width="500">
 </div>
 
 *Figure 5: Top 20 most important features averaged across samples showing DeBERTa-Sentinel's learned patterns. High-importance words like "system" (0.245), "background" (0.200), and "situation" (0.145) indicate formal language structures and contextual markers that the model associates with AI-generated content.*
@@ -243,7 +243,7 @@ Open any of the LIME explanation HTML files (`lime_explanation_sample_1.html` to
 ### Example Text Analysis
 
 <div align="center">
-  <img src="expl_para.PNG" alt="Text Highlighting Example" width="700">
+  <img src="expl_para.PNG" alt="Text Highlighting Example" width="500" height="500">
 </div>
 
 *Figure 6: Example of token-level explainability visualization showing how DeBERTa-Sentinel highlights specific words in a movie review. Orange highlighting indicates words that contribute toward AI classification, demonstrating the model's attention to formal transitional phrases like "Although" and structured language patterns.*
