@@ -83,13 +83,17 @@ Welcome to the official repository for the paper _"DeBERTa-Sentinel: An Explaina
 
 ### ROC Curve Analysis
 
-![ROC Curve](roc_curve_highres.png)
+<div align="center">
+  <img src="roc_curve_highres.png" alt="ROC Curve" width="600">
+</div>
 
 *Figure 1: ROC curve for DeBERTa-Sentinel showing exceptional discrimination capability with 99.53% AUC. The near-perfect curve hugging the top-left corner demonstrates superior ability to distinguish between AI and human text compared to random classification.*
 
 ### F1-Score Comparison
 
-![F1 Score Comparison](f1_comparison_highres.png)
+<div align="center">
+  <img src="f1_comparison_highres.png" alt="F1 Score Comparison" width="600">
+</div>
 
 *Figure 2: F1-score comparison across baseline models showing DeBERTa-Sentinel's performance (0.976) relative to traditional ML approaches, demonstrating a 12.6% improvement over TF-IDF + LogReg.*
 
@@ -130,42 +134,37 @@ Performance comparison with commercial detectors from prior literature:
 
 ### DeBERTa-Sentinel Architecture
 
-![DeBERTa-Sentinel Architecture](RoBERTa%20VS%20DeBERTa.drawio%20(1).png)
+<div align="center">
+  <img src="RoBERTa%20VS%20DeBERTa.drawio%20(1).png" alt="DeBERTa-Sentinel Architecture" width="700">
+</div>
 
 *Figure 3: The DeBERTa-Sentinel architecture. The input sequence is embedded and processed through 12 layers of disentangled attention. The final [CLS] token representation is used for classification via the internal feedforward layer. The architecture is fully end-to-end fine-tuned with gradients backpropagating through all layers of the encoder.*
 
 ### Disentangled Attention Mechanism
 
-![Disentangled Attention](DDA.drawio.png)
+The DeBERTa architecture enhances transformer models by disentangling content and position information in the self-attention mechanism:
 
-*Figure 4: DeBERTa's disentangled self-attention architecture for AI text detection, which separates traditional attention into three components: Content-to-Content (semantic relationships), Content-to-Position (how content relates to structure), and Position-to-Content (how position influences meaning). By analyzing content and structural patterns separately rather than together, this approach can detect subtle AI writing signatures like unnatural vocabulary usage, templating patterns, and content-position misalignments that distinguish AI-generated text from human writing.*
+**Traditional Attention**:
+```
+Attention(Q, K, V) = softmax(QK^T / √d_k)V
+```
 
-**Architecture Details**:
-- **Base Model**: DeBERTa-v3-small (Microsoft/deberta-v3-small)
-- **Architecture**: DebertaV2ForSequenceClassification
-- **Encoder Layers**: 12 layers of disentangled attention
-- **Max Token Length**: 256 tokens
-- **Fine-Tuning Approach**: Full end-to-end fine-tuning (encoder + classifier)
+**Disentangled Attention Components**:
+1. **Content-to-Content (C2C)**: Captures semantic relationships between tokens
+2. **Content-to-Position (C2P)**: Models how content relates to positional structure
+3. **Position-to-Content (P2C)**: Captures positional biases in content understanding
 
-### Training Configuration
+This decomposition enables more nuanced understanding of linguistic patterns characteristic of AI-generated text.
 
-| Hyperparameter | Value |
-|----------------|-------|
-| Epochs | 5 |
-| Batch Size | 8 |
-| Learning Rate | 2 × 10⁻⁵ |
-| Weight Decay | 0 (default) |
-| Optimizer | AdamW |
-| Loss Function | Cross Entropy |
-| Random Seed | 42 |
-| Dataset Split | 60% train / 20% validation / 20% test |
-
-### Training Performance
-- **Epoch 1 Training Accuracy**: 96.36%
-- **Epoch 2 Validation Accuracy**: 98.21% (best model - selected for testing)
-- **Epoch 5 Training Accuracy**: 99.58%
-- Validation accuracy peaked at epoch 2, with subsequent epochs showing overfitting
-- Best model selected based on validation performance to ensure generalization
+### Training Details
+- **Architecture**: DeBERTa-v3-small (44M parameters)
+- **Sequence Length**: 256 tokens
+- **Optimizer**: AdamW (lr=2e-5, β1=0.9, β2=0.999, ε=1e-8)
+- **Batch Size**: 64
+- **Epochs**: 5 (best model from epoch 2)
+- **Weight Decay**: 0.01
+- **Gradient Clipping**: 1.0
+- **Learning Rate Schedule**: Linear warmup + decay
 
 ## Dataset Details
 
@@ -235,13 +234,17 @@ Open any of the LIME explanation HTML files (`lime_explanation_sample_1.html` to
 
 ### Token-Level Feature Importance
 
-![Feature Importance](lime_average_feature_importance.png)
+<div align="center">
+  <img src="lime_average_feature_importance.png" alt="Feature Importance" width="600">
+</div>
 
 *Figure 5: Top 20 most important features averaged across samples showing DeBERTa-Sentinel's learned patterns. High-importance words like "system" (0.245), "background" (0.200), and "situation" (0.145) indicate formal language structures and contextual markers that the model associates with AI-generated content.*
 
 ### Example Text Analysis
 
-![Text Highlighting Example](expl_para.PNG)
+<div align="center">
+  <img src="expl_para.PNG" alt="Text Highlighting Example" width="700">
+</div>
 
 *Figure 6: Example of token-level explainability visualization showing how DeBERTa-Sentinel highlights specific words in a movie review. Orange highlighting indicates words that contribute toward AI classification, demonstrating the model's attention to formal transitional phrases like "Although" and structured language patterns.*
 
